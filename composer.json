@@ -1,0 +1,11 @@
+{
+    "autoload": {
+        "psr-0": {
+            "MyApp": "src",
+            "Menu": "src"
+        }
+    },
+    "require": {
+        "cboden/ratchet": "0.3.*"
+    }
+}
