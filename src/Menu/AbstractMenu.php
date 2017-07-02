@@ -1,13 +1,11 @@
 <?php
 namespace Menu;
-
 abstract class AbstractMenu
 {
     protected
         $currentStep,
         $availableSteps = [],
         $onOpenMessage = '';
-
     protected $message;
 
     /**
@@ -25,7 +23,6 @@ abstract class AbstractMenu
     public function setMessage($message)
     {
         $this->message = $message;
-
         return $this;
     }
 
@@ -44,7 +41,6 @@ abstract class AbstractMenu
     public function setCurrentStep($currentStep)
     {
         $this->currentStep = $currentStep;
-
         return $this;
     }
 
@@ -63,7 +59,6 @@ abstract class AbstractMenu
     public function setAvailableSteps($availableSteps)
     {
         $this->availableSteps = $availableSteps;
-
         return $this;
     }
 
@@ -82,18 +77,26 @@ abstract class AbstractMenu
     public function setOnOpenMessage($onOpenMessage)
     {
         $this->onOpenMessage = $onOpenMessage;
-
         return $this;
     }
 
+    /**
+     * @param $message
+     * @return mixed
+     * @throws \Exception
+     */
     public function handleMessage($message)
     {
         $availableSteps = $this->getAvailableSteps();
-
         if (! isset($availableSteps[$message])) {
-            throw new \Exception('No such available step.'); // TODO create custom exception
+            $this->throwException();
+            // TODO create custom exception
         }
-
         return $availableSteps[$message];
+    }
+
+    public function throwException()
+    {
+        throw new \Exception('Невъзможен ход');
     }
 }
